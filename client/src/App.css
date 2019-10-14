@@ -1,22 +1,27 @@
-.App {
-  text-align: center;
+
+:root {
+  --mainWhite: #f3f3f3;
+  --mainDark: #232528;
+  --mainNavy: #2b3441;
+  --mainYellow: #ffa400;
+  --mainBlue: #2a2a72;
+  --lightGrey: #969696;
+  --lightBlue: #00c8ff;
+  --lightGreen: #9fc461;
+  --darkGreen: #40ad48;
+  --danger: #d35832;
+  --purple: #d3aad6;
+  --greyMuted: #d6d6d6;
+  --lightGrey2: #b2b2c2;
+  --mainGrey: #545454;
 }
 
-.App-logo {
-  height: 40vmin;
+*{
+  box-sizing:border-box;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+body{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background: var(--mainWhite) !important;
+  color: var(--mainDark) !important;
 }
