@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const passportLocalMongoose = require('passport-local-mongoose');
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
     email: {
         type: String,
         unique: true,
@@ -11,6 +11,11 @@ var UserSchema = new Schema({
     voyages: []
 });
 
-UserSchema.plugin(passportLocalMongoose);
+UserSchema.plugin(passportLocalMongoose, {
+    usernameField: "email",
+    findByUsername: (model, queryParameters) => {
+        return model.findOne(queryParameters);
+      }
+});
 
 module.exports = mongoose.model('User', UserSchema);
