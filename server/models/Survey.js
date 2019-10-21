@@ -8,6 +8,7 @@ const SurveySchema = new Schema({
         unique: true,
         required: true
     },
+    spreadsheetId: String,
     headers: [],
     answers: []
 });
