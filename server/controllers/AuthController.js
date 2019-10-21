@@ -84,19 +84,22 @@ exports.getUsers = (req, res) => {
 
 exports.postLogin = (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }, (err, user) => {
-        if(err || !user) {
-          res.status(err.status || 401).send({err})
+    passport.authenticate('local', { successRedirect: '/'}, (err, user, info) => {
+        if(!user) {
+          res.status(err.status ||500).send({ success: false, msg: info});
         } else {
-          req.session.userId = result._id;
-          req.session.save();
-          res.status(200).send("logged in");
+          req.login(user, (err) => {
+            if(err) {
+              return next(err);
+            }
+            req.session.userId = user._id;
+            req.session.save();
+            res.status(200).send("logged in");
+          }) 
         }
-    });
-      
+    })(req, res, next);;
   } catch(err) {
-    console.log(err);
+    res.status(err.status || 500).send({ success: false, msg: info});
   }
 };
 
