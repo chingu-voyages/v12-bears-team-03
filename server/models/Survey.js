@@ -10,7 +10,8 @@ const SurveySchema = new Schema({
     },
     spreadsheetId: String,
     headers: [],
-    answers: []
+    answers: [],
+    voyage: Number
 });
 
 SurveySchema.plugin(passportLocalMongoose);
