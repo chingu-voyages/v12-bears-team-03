@@ -56,4 +56,9 @@ router.post('/login', authController.postLogin);
 // @access  Private
 router.get('/current', authController.getCurrentUser);
 
+// @route   GET api/auth/logout
+// @desc    Logout user
+// @access  Public
+router.get('/logout', authController.logout);
+
 module.exports = router;
