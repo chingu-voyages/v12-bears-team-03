@@ -101,3 +101,23 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.getCurrentUser = (req, res) => res.json({ msg: 'Current user' });
+
+exports.logout = (req, res, next) => {
+  if (req.session) {
+    req.logout();
+    req.session.destroy((err) => {
+      if (err) {
+        res.status(500).send({ msg: err })
+      } else {
+        res.clearCookie('connect.sid', {path: '/'});
+        res.json({
+          msg: 'You are successfully logged out!'
+        });
+      }
+    });
+  } else {
+    var err = new Error('You are not logged in!');
+    err.status = 403;
+    next(err);
+  }
+};
