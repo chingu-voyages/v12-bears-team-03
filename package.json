@@ -23,6 +23,7 @@
   "homepage": "https://github.com/chingu-voyages/v12-bears-team-03#readme",
   "dependencies": {
     "concurrently": "^5.0.0",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0"
   }
 }
