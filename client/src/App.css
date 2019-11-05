@@ -4,7 +4,7 @@
   --mainDark: #232528;
   --mainNavy: #2b3441;
   --mainYellow: #ffa400;
-  --mainBlue: #2a2a72;
+  --mainBlue: #4285f4;
   --lightGrey: #969696;
   --lightBlue: #00c8ff;
   --lightGreen: #9fc461;
@@ -14,6 +14,7 @@
   --greyMuted: #d6d6d6;
   --lightGrey2: #b2b2c2;
   --mainGrey: #545454;
+  
 }
 
 *{
