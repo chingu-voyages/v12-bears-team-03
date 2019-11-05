@@ -4,6 +4,8 @@ import { store, createStore } from 'redux';
 import { Route, Link } from 'react-router-dom';
 import Login from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
+require('dotenv').config();
+
 
 
 const App = () => (
