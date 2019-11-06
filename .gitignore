@@ -30,3 +30,7 @@ default.json
 # dotenv environment variables file
 .env
 .env.test
+
+# credentials 
+credentials.json 
+token.json 
