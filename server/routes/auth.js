@@ -6,12 +6,12 @@ const authController = require('../controllers/AuthController');
 
 const router = express.Router();
 
-function isLoggedIn(request, response, next) {
+function isLoggedIn(req, res, next) {
   // passport adds this to the request object
-  if (request.isAuthenticated()) {
+  if (req.isAuthenticated()) {
       return next();
-  }
-  response.redirect('/login');
+  } 
+  res.redirect('/login');
 }
 
 // use as middleware for routes that need auth
@@ -50,6 +50,39 @@ router.post('/register', cors(), authController.validate('register'), authContro
 // @desc    Login user
 // @access  Public
 router.post('/login', authController.postLogin);
+
+// @route   GET api/auth/google
+// @desc    Redirect user to Google.com for authorization
+// @access  Public
+router.get('/google', passport.authenticate('google', {
+  scope: ['https://www.googleapis.com/auth/userinfo.profile',
+          'https://www.googleapis.com/auth/userinfo.email',
+          'https://www.googleapis.com/auth/forms'],
+  failureRedirect: '/',
+  session: true
+  }), 
+  (req, res) => {
+    console.log("req",req)
+    console.log("res",res)
+    res.redirect('/')
+    //authController.googleLogin(req, res)
+  }
+);
+
+// @route   GET api/auth/google/callback
+// @desc    Set session cookie
+// @access  Public
+router.get('/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }),
+    (req, res) => {
+      console.log("auth controller")
+      res.redirect('/')
+      //authController.googleLogin(req, res)
+    }
+);
 
 // @route   GET api/auth/current
 // @desc    Return current user
