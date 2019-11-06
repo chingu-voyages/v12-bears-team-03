@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const path = require('path');
 const express = require('express');
 const session = require('express-session')
@@ -11,6 +13,7 @@ const db = require('./db/config');
 
 // Routes
 const authRoutes = require('./routes/auth');
+const mainRoutes = require('./routes/main');
 
 // passport strategies
 const auth = require('./auth/auth');
@@ -41,6 +44,8 @@ app.use(session({
 app.use(passport.initialize()); 
 app.use(passport.session()); 
 
+auth(passport);
+
 // Setup parser
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -63,5 +68,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // Routes will begin with `/api/auth`
 app.use('/api/auth', authRoutes);
+app.use('/', mainRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
