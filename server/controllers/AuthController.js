@@ -105,6 +105,18 @@ exports.postLogin = (req, res, next) => {
 
 exports.getCurrentUser = (req, res) => res.json({ msg: 'Current user' });
 
+// Set session cookie when user is logged in
+exports.googleLogin = async (req, res, next) => {
+  req.session.token = req.user.token;
+  //console.log("session", req.session)
+  console.log("user", req)
+  /* await User.findOne({email: req.user.email}).then(user => {
+    req.session.id = user.id;
+  }) */
+  req.session.save();
+  return res.redirect('/api/auth');
+}
+
 exports.logout = (req, res, next) => {
   if (req.session) {
     req.logout();

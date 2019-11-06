@@ -44,6 +44,8 @@ app.use(session({
 app.use(passport.initialize()); 
 app.use(passport.session()); 
 
+auth(passport);
+
 // Setup parser
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
