@@ -35,6 +35,21 @@ router.get('/testauth', passport.authenticate('local', { session: false }), (req
     @access  Public */
 router.get('/test', (req, res) => res.json({ msg: 'Auth Route reached' }));
 
+/*  @route   GET api/auth/
+    @desc    Main route
+    @access  Public */
+router.get('/', (req, res) => {
+  //console.log(req.session)
+  if(req.session.token) {
+    res.cookie('token', req.session.token);
+    res.json({status: 'session cookie set'})
+    return next();
+  } else {
+    res.cookie('token', '');
+    res.json({status: 'session cookie not set'})
+  }
+});
+
 /*  @route   GET api/auth/users
     @desc    Test route to get all users
     @access  Public */
@@ -45,6 +60,11 @@ router.get('/users', authController.getUsers);
 // @access  Public
 router.options('/register', cors());
 router.post('/register', cors(), authController.validate('register'), authController.register);
+
+// @route   POST api/auth/login
+// @desc    Login user
+// @access  Public
+//router.get('/login', (req, res) => res.render('index'));
 
 // @route   POST api/auth/login
 // @desc    Login user
@@ -88,6 +108,11 @@ router.get('/google/callback',
 // @desc    Return current user
 // @access  Private
 router.get('/current', authController.getCurrentUser);
+
+// @route   GET api/auth/current
+// @desc    Return current user
+// @access  Private
+router.get('/dashboard', authController.getCurrentUser);
 
 // @route   GET api/auth/logout
 // @desc    Logout user
